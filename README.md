@@ -2,4 +2,4 @@
 ===============================
 
 Image example
-![Alt text](//mnt/md0/routine/routine_image/Daily_OP.png)
+![Alt text](./routine_image/Daily_OP.png)
