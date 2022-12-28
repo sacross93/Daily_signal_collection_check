@@ -5,6 +5,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text      import MIMEText
 from email.mime.image     import MIMEImage
 import datetime
+import sys
+sys.path.append('/mnt/md0/routine/account_info/')
+import account_info
+
+id, pw = account_info.jinyoungbot0308()
 curt_day = (datetime.datetime.now() - datetime.timedelta(days=1)).date()
 
 class EmailHTMLImageContent:
@@ -33,8 +38,8 @@ class EmailHTMLImageContent:
         self.msg.attach(mime_img)
         
         assert template.template.find("cid:my_image2") >= 0, 'template must have cid for embedded image.'
-        assert os.path.isfile("/mnt/md0/routine/routine_image/SAR_Calc.png"), 'image file does not exist'
-        with open('/mnt/md0/routine/routine_image/SAR_Calc.png', 'rb') as img_file2:
+        assert os.path.isfile("/mnt/md0/routine/daily_collection_mail/routine_image/Table_description.png"), 'image file does not exist'
+        with open('/mnt/md0/routine/daily_collection_mail/routine_image/Table_description.png', 'rb') as img_file2:
             mime_img = MIMEImage(img_file2.read())
             mime_img.add_header('Content-ID', '<' + 'my_image2' + '>')
         self.msg.attach(mime_img)
@@ -57,7 +62,7 @@ class EmailSender:
         self.ss = smtplib.SMTP(host=str_host, port=num_port)
         # SMTP인증이 필요하면 아래 주석을 해제
         self.ss.starttls() # TLS(Transport Layer Security) 시작
-        self.ss.login("jinyoungbot0308@gmail.com", "rvaklesfohymcobn") # 메일서버에 연결한 계정과 비밀번호
+        self.ss.login(id, pw) # 메일서버에 연결한 계정과 비밀번호
 
     def send_message(self, emailContent, str_from_email_addr, str_to_eamil_addrs):
         """e메일을 발송한다 """
@@ -76,13 +81,13 @@ template = Template("""<html>
                             </body>
                         </html>""")
 template_params       = {'NAME':'Signal house'}
-str_image_file_name   = "/mnt/md0/routine/routine_image/Daily_OP.png"
+str_image_file_name   = "/mnt/md0/routine/daily_collection_mail/routine_image/Daily_OP.png"
 str_cid_name          = 'my_image1'
 emailHTMLImageContent = EmailHTMLImageContent(str_subject, str_image_file_name, str_cid_name, template, template_params)
 
 str_from_email_addr = "jinyoungbot0308@gmail.com" # 발신자
-#str_to_eamil_addrs  = ["jinyoungkim0308@gmail.com", "zephyrus02@gmail.com", "dien.eaststar@gmail.com", "bapor.km.kang@gmail.com", "wjdgns03125@gmail.com", "hskim.bme@gmail.com", "shkimans@gmail.com "] # 수신자리스트
-str_to_eamil_addrs = ["jinyoungkim0308@gmail.com", "zephyrus02@gmail.com"]
+# str_to_eamil_addrs  = ["jinyoungkim0308@gmail.com", "zephyrus02@gmail.com", "dien.eaststar@gmail.com", "bapor.km.kang@gmail.com", "wjdgns03125@gmail.com", "hskim.bme@gmail.com", "shkimans@gmail.com "] # 수신자리스트
+str_to_eamil_addrs = ["jinyoungkim0308@gmail.com"]
 emailSender.send_message(emailHTMLImageContent, str_from_email_addr, str_to_eamil_addrs)
 
 

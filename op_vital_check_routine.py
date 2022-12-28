@@ -382,22 +382,23 @@ def signal_collecting_rate(date):
         sarnum = 'SAR$_{NUM}$ = ' + str(np.round(sarnum,1))+'%'
         sartime = np.sum(dt_time_list)/np.sum(op_time_list) * 100    
         sartime = 'SAR$_{TIME}$ = '+str(np.round(sartime,1))+'%'
-        ac.text(0.0, 1.3+y_text_shift, 'N$_{OPERATION}$ = '+ str(len(op_time_list)), transform=ac.transAxes, ha='left', fontsize=15, color='blue')
-        ac.text(0.0, 1.1+y_text_shift, 'T$_{OPERATION}$ = '+ str(int(np.sum(op_time_list).total_seconds()/60))+'min', transform=ac.transAxes, ha='left', fontsize=15, color='blue')
-        ac.text(0.27, 1.3+y_text_shift, 'N$_{DATA, f>0.7}$ = '+ str(len(np.where(dt_time_list/op_time_list>0.7)[0])), transform=ac.transAxes, ha='left', fontsize=15, color='blue')
-        ac.text(0.27, 1.1+y_text_shift, 'T$_{DATA}$ = '+ str(int(np.sum(dt_time_list).total_seconds()/60))+'min', transform=ac.transAxes, ha='left', fontsize=15, color='blue')
-        ac.text(0.5, 1.3+y_text_shift, sarnum, transform=ac.transAxes, ha='left', fontsize=15, color='blue')
-        ac.text(0.5, 1.1+y_text_shift, sartime, transform=ac.transAxes, ha='left', fontsize=15, color='blue')
+        ac.text(0.0, 1.3+y_text_shift, 'N$_{OPERATION}$ = '+ str(len(op_time_list)), transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.0, 1.1+y_text_shift, 'T$_{OPERATION}$ = '+ str(int(np.sum(op_time_list).total_seconds()/60))+'min', transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.27, 1.3+y_text_shift, 'N$_{DATA, f>0.7}$ = '+ str(len(np.where(dt_time_list/op_time_list>0.7)[0])), transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.27, 1.1+y_text_shift, 'T$_{DATA}$ = '+ str(int(np.sum(dt_time_list).total_seconds()/60))+'min', transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.5, 1.3+y_text_shift, sarnum, transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.5, 1.1+y_text_shift, sartime, transform=ac.transAxes, ha='left', fontsize=15, color='black')
+        ac.text(0.86, 1.1+y_text_shift, str((datetime.datetime.now() - datetime.timedelta(days=1)).date()) , transform=ac.transAxes, ha='left', fontsize=15, color='black')
     
     
-    ac.text(0.99, 0.8+y_text_shift, datestr, transform=ac.transAxes, ha='right', fontsize=15)
+#    ac.text(0.99, 0.8+y_text_shift, datestr, transform=ac.transAxes, ha='right', fontsize=15)
     ac.text(0.01, 0.6+y_text_shift, 'Operation', transform=ac.transAxes, ha='left', fontsize=15, color='dodgerblue')
     ac.text(0.01, 0.1+y_text_shift, 'Data', transform=ac.transAxes, ha='left', fontsize=15, color='forestgreen')
     ac.text(1, 1.3+y_text_shift, errstr1, transform=ac.transAxes, ha='right', fontsize=15, color='red')
     ac.text(1, 1.1+y_text_shift, errstr2, transform=ac.transAxes, ha='right', fontsize=15, color='red')
     ac.set_xticklabels(['6h','12h','18h'])
 
-    plt.savefig("/mnt/md0/routine/routine_image/Daily_OP.png", bbox_inches='tight', transparent=False)
+    plt.savefig("/mnt/md0/routine/daily_collection_mail/routine_image/Daily_OP.png", bbox_inches='tight', transparent=False)
     plt.savefig(f"/mnt/md0/routine/op_check_img/{date}.png", bbox_inches='tight', transparent=False)
 
 op_date = datetime.datetime.now().date() - datetime.timedelta(days=1)
