@@ -86,8 +86,8 @@ str_cid_name          = 'my_image1'
 emailHTMLImageContent = EmailHTMLImageContent(str_subject, str_image_file_name, str_cid_name, template, template_params)
 
 str_from_email_addr = "jinyoungbot0308@gmail.com" # 발신자
-# str_to_eamil_addrs  = ["jinyoungkim0308@gmail.com", "zephyrus02@gmail.com", "dien.eaststar@gmail.com", "bapor.km.kang@gmail.com", "wjdgns03125@gmail.com", "hskim.bme@gmail.com", "shkimans@gmail.com "] # 수신자리스트
-str_to_eamil_addrs = ["jinyoungkim0308@gmail.com"]
+str_to_eamil_addrs  = ["jinyoungkim0308@gmail.com", "zephyrus02@gmail.com", "dien.eaststar@gmail.com", "bapor.km.kang@gmail.com", "wjdgns03125@gmail.com", "hskim.bme@gmail.com", "shkimans@gmail.com "] # 수신자리스트
+#str_to_eamil_addrs = ["jinyoungkim0308@gmail.com"]
 emailSender.send_message(emailHTMLImageContent, str_from_email_addr, str_to_eamil_addrs)
 
 

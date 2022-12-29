@@ -122,11 +122,11 @@ def get_filerecorded_data(date=''):
     date = '_'+date[2:]+'@_'
 
     if date!='':
-        sql ="""select id, begin_date, end_date, file_path, file_basename from sa_api_filerecorded where file_basename like %s escape '@' order by id  """
+        sql ="""select id, begin_date, end_date, file_path, file_basename from sa_api_filerecorded where file_basename like %s escape '@' and end_date != '1970-01-01' order by id  """
         curs.execute(sql,('%'+date+'%'))
 #         curs.execute(sql,(str(date)+'%'))
     else:
-        sql ="""select id, begin_date, end_date, file_path, file_basename from sa_api_filerecorded order by id """
+        sql ="""select id, begin_date, end_date, file_path, file_basename from sa_api_filerecorded where end_date != '1970-01-01' order by id """
         curs.execute(sql)
     result = curs.fetchall()
     result = np.array(result)
@@ -399,7 +399,7 @@ def signal_collecting_rate(date):
     ac.set_xticklabels(['6h','12h','18h'])
 
     plt.savefig("/mnt/md0/routine/daily_collection_mail/routine_image/Daily_OP.png", bbox_inches='tight', transparent=False)
-    plt.savefig(f"/mnt/md0/routine/op_check_img/{date}.png", bbox_inches='tight', transparent=False)
+   # plt.savefig(f"/mnt/md0/routine/op_check_img/{date}.png", bbox_inches='tight', transparent=False)
 
 op_date = datetime.datetime.now().date() - datetime.timedelta(days=1)
 op_date = str(op_date).replace("-","")
